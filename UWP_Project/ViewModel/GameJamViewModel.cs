@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.Devices.Gpio;
 
 namespace UWP_Project.ViewModel
 {
@@ -28,6 +29,9 @@ namespace UWP_Project.ViewModel
         {
             _mvm = mvm;
             Str = "No Input";
+            GPIOIndicator = "Waiting to initialize GPIO...";
+
+            InitGPIO();
         }
         #endregion
 
@@ -38,6 +42,31 @@ namespace UWP_Project.ViewModel
         {
             get { return _str; }
             set { _str = value; OnPropertyChanged("Str"); }
+        }
+
+        private string _gpioIndicator;
+        public string GPIOIndicator
+        {
+            get { return _gpioIndicator; }
+            set { _gpioIndicator = value; OnPropertyChanged("GPIOIndicator"); }
+        }
+
+        #endregion
+
+        #region Methods
+
+        private void InitGPIO()
+        {
+            var gpio = GpioController.GetDefault();
+
+            if (gpio == null)
+            {
+                GPIOIndicator = "There is no GPIO controller on this device.";
+            }
+            else
+            {
+                GPIOIndicator = "Connected to default GPIO controller";
+            }
         }
 
         #endregion

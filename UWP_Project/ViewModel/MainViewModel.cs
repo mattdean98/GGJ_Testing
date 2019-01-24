@@ -58,10 +58,16 @@ namespace UWP_Project.ViewModel
             }
         }
 
-        async public void ShowAlert(string message, string title = "Alert")
+        async public void ShowAlert(string message, string title = "Alert", string btn = "Ok")
         {
-            MessageDialog md = new MessageDialog(message, title);
-            var test = await md.ShowAsync();
+            ContentDialog dialogbox = new ContentDialog
+            {
+                Title = title,
+                Content = message,
+                CloseButtonText = "Ok"
+            };
+
+            await dialogbox.ShowAsync();
         }
         #endregion
 
