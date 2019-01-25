@@ -92,7 +92,7 @@ namespace UWP_Project.ViewModel
             }
             else
             {
-                GPIOIndicator = "Connected to default GPIO controller. :O ";
+                GPIOIndicator = "Connected to default GPIO controller.";
                 GPIO = GpioController.GetDefault();
                 LEDPin = GPIO.OpenPin(LED_PIN);
                 LEDPin.SetDriveMode(GpioPinDriveMode.Output);
