@@ -6,8 +6,6 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.Devices.Gpio;
 
-using UWP_Project.Utilities;
-
 namespace UWP_Project.ViewModel
 {
     public class GameJamViewModel : INotifyPropertyChanged
@@ -55,7 +53,8 @@ namespace UWP_Project.ViewModel
 
         private GpioController GPIO;
 
-        private const int LED_PIN = 5;
+        private const int GPIO3_PIN = 5;
+        private const int GPIO2_PIN = 3;
 
         private string _str;
         public string Str
@@ -79,7 +78,8 @@ namespace UWP_Project.ViewModel
         }
 
 
-        public GpioPin LEDPin;
+        public GpioPin GPIO2;
+        public GpioPin GPIO3;
 
         #endregion
 
@@ -98,8 +98,10 @@ namespace UWP_Project.ViewModel
             {
                 GPIOIndicator = "Connected to default GPIO controller.";
                 GPIO = GpioController.GetDefault();
-                LEDPin = GPIO.OpenPin(LED_PIN);
-                LEDPin.SetDriveMode(GpioPinDriveMode.Output);
+                GPIO2 = GPIO.OpenPin(GPIO2_PIN);
+                GPIO3 = GPIO.OpenPin(GPIO3_PIN);
+                GPIO2.SetDriveMode(GpioPinDriveMode.Output);
+                GPIO3.SetDriveMode(GpioPinDriveMode.Output);
                 return true;
             }
         }
@@ -107,26 +109,14 @@ namespace UWP_Project.ViewModel
         public void ToggleLED()
         {
             LED = !LED;
-            if (LED)
-            {
-                LEDPin.Write(GpioPinValue.Low);
-            }
-            else
-            {
-                LEDPin.Write(GpioPinValue.High);
-            }
-        }
-
-        public void SendStringToConsole(string message)
-        {
-            if (string.IsNullOrWhiteSpace(message))
-            {
-                return;
-            }
-
-            displayI2C lcd = new displayI2C(0x27, "I2C1", 0, 1, 2, 4, 5, 6, 7, 3);
-            lcd.init();
-            lcd.prints(message);
+            //if (LED)
+            //{
+            //    LEDPin.Write(GpioPinValue.Low);
+            //}
+            //else
+            //{
+            //    LEDPin.Write(GpioPinValue.High);
+            //}
         }
 
         #endregion
