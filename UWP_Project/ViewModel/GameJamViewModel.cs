@@ -31,11 +31,19 @@ namespace UWP_Project.ViewModel
             Str = "No Input";
             GPIOIndicator = "Waiting to initialize GPIO...";
 
-            InitGPIO();
+            if (!InitGPIO())
+            {
+                mvm.ShowAlert("Unable to configure GPIO, please reboot the application.");
+                return;
+            }
+            _ledPin = GPIO.OpenPin(LED_PIN);
         }
         #endregion
 
         #region Properties
+        private GpioController GPIO;
+
+        private const int LED_PIN = 27;
 
         private string _str;
         public string Str
@@ -51,21 +59,47 @@ namespace UWP_Project.ViewModel
             set { _gpioIndicator = value; OnPropertyChanged("GPIOIndicator"); }
         }
 
+        private bool _led;
+        public bool LED
+        {
+            get { return _led; }
+            set { _led = value; OnPropertyChanged("LED"); }
+        }
+
+
+        private GpioPin _ledPin;
+
         #endregion
 
         #region Methods
 
-        private void InitGPIO()
+        private bool InitGPIO()
         {
             var gpio = GpioController.GetDefault();
 
             if (gpio == null)
             {
                 GPIOIndicator = "There is no GPIO controller on this device.";
+                return false;
             }
             else
             {
                 GPIOIndicator = "Connected to default GPIO controller. :O ";
+                GPIO = GpioController.GetDefault();
+                _ledPin.SetDriveMode(GpioPinDriveMode.Output);
+                return true;
+            }
+        }
+
+        public void ToggleLED()
+        {
+            if (LED)
+            {
+                _ledPin.Write(GpioPinValue.High);
+            }
+            else
+            {
+                _ledPin.Write(GpioPinValue.Low);
             }
         }
 

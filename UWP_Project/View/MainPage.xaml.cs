@@ -42,5 +42,10 @@ namespace UWP_Project.View
             mvm.ShowAlert("Testing message pop ups");
             mvm.GJVM.Str = "No Input";
         }
+
+        private void ToggleLED_Click(object sender, RoutedEventArgs e)
+        {
+            mvm.GJVM.ToggleLED();
+        }
     }
 }
