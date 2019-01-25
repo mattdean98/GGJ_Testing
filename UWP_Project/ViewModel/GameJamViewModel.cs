@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.Devices.Gpio;
 
+using UWP_Project.Utilities;
+
 namespace UWP_Project.ViewModel
 {
     public class GameJamViewModel : INotifyPropertyChanged
@@ -113,6 +115,18 @@ namespace UWP_Project.ViewModel
             {
                 LEDPin.Write(GpioPinValue.High);
             }
+        }
+
+        public void SendStringToConsole(string message)
+        {
+            if (string.IsNullOrWhiteSpace(message))
+            {
+                return;
+            }
+
+            displayI2C lcd = new displayI2C(0x27, "I2C1", 0, 1, 2, 4, 5, 6, 7, 3);
+            lcd.init();
+            lcd.prints(message);
         }
 
         #endregion

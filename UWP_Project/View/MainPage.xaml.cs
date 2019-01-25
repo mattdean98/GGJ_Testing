@@ -53,5 +53,11 @@ namespace UWP_Project.View
         {
             mvm.GJVM.ToggleLED();
         }
+
+        async private void Console_Click(object sender, RoutedEventArgs e)
+        {
+            var str = await mvm.ShowInputAsync("Enter a string");
+            //mvm.ShowAlert("Entered input is: " + str);
+        }
     }
 }

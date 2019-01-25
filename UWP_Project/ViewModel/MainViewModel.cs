@@ -8,6 +8,8 @@ using Windows.ApplicationModel.Background;
 using Windows.UI.Popups;
 using Windows.UI.Xaml.Controls;
 
+using UWP_Project.View;
+
 namespace UWP_Project.ViewModel
 {
     public class MainViewModel  : INotifyPropertyChanged
@@ -59,6 +61,20 @@ namespace UWP_Project.ViewModel
             {
                 return false;
             }
+        }
+
+        public async Task<string> ShowInputAsync(string message, string title = "Input")
+        {
+            var str = "";
+            var dialog1 = new InputDialogBox(message, title);
+            dialog1.PrimaryButtonText = "Confirm";
+            dialog1.Title = title;
+            var result = await dialog1.ShowAsync();
+            if (result == ContentDialogResult.Primary)
+            {
+                str = dialog1.Text;
+            }
+            return str;
         }
 
         async public void ShowAlert(string message, string title = "Alert", string btn = "Ok")
