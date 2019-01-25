@@ -29,6 +29,12 @@ namespace UWP_Project.View
         {
             this.InitializeComponent();
             mvm = App.mvm;
+
+
+            if (mvm.GJVM.CanRun == false)
+            {
+                ToggleLED_Button.IsEnabled = false;
+            }
         }
 
         async private void ConfirmClick(object sender, RoutedEventArgs e)

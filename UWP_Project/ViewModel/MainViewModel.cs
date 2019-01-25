@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.ApplicationModel.Background;
 using Windows.UI.Popups;
 using Windows.UI.Xaml.Controls;
 
@@ -35,6 +36,8 @@ namespace UWP_Project.ViewModel
         {
             _mvm = this;
             GJVM = new GameJamViewModel(this);
+
+            //var test = BackgroundExecutionManager.RequestAccessAsync();
         }
 
         async public Task<bool> ShowConfirm(string message, string title="Confirm", string primaryBtn = "Yes", string secondaryBtn="No")
