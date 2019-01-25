@@ -7,6 +7,10 @@
  *  Version: 1.1
  *  Keywords: Windows IoT, LCD, HD44780, PCF8574, I2C bus, Raspberry Pi 2
  *  Git: https://github.com/DzeryCZ/Character-LCD-over-I2C
+ *  
+ *  Website for instructions (added by matt for safekeeping): https://www.hackster.io/dzerycz/character-lcd-over-i2c-ba8ee9
+ *  
+ *  Comments at end added by Matt in case website above goes down and were fucked.
 **/
 
 
@@ -267,3 +271,89 @@ namespace UWP_Project.Utilities
 
     }
 }
+
+
+/*
+ * 
+ * 
+ * Methods
+init
+Initialize HD44780 display
+
+Arguments:
+
+bool turnOnDisplay (default: true)
+bool turnOnCursor (default: false)
+bool blinkCursor (default: false)
+bool cursorDirection (default: true)
+bool textShift (default: false)
+
+
+turnOnBacklight
+Turn the Back light ON
+
+No arguments
+
+
+
+turnOffBacklight
+Turn the Back light OFF
+
+No arguments
+
+
+
+prints
+Print string to display
+
+Arguments:
+
+string text
+
+
+printc
+Print char to display
+
+Arguments:
+
+char letter
+
+
+gotoSecondLine
+Move cursor to start of the second line
+
+No arguments
+
+
+
+gotoxy
+Move cursor to X and Y coordinates
+
+Arguments:
+
+byte x
+byte y
+
+
+clrscr
+Clear screen and move cursor to start
+
+No arguments
+
+
+
+createSymbol
+Create custom symbol
+
+Arguments:
+
+byte[] data
+byte address
+printSymbol
+Print custom symbol
+
+Arguments:
+
+byte address
+
+    */
