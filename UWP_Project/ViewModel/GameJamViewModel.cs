@@ -65,7 +65,7 @@ namespace UWP_Project.ViewModel
             }
             else
             {
-                GPIOIndicator = "Connected to default GPIO controller";
+                GPIOIndicator = "Connected to default GPIO controller. :O ";
             }
         }
 
