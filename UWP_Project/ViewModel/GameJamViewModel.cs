@@ -32,6 +32,8 @@ namespace UWP_Project.ViewModel
             GPIOIndicator = "Waiting to initialize GPIO...";
             CanRun = true;
 
+            LED = false;
+
             if (!InitGPIO())
             {
                 GPIOIndicator = "Unable to configure GPIO, please reboot the application.";
@@ -51,7 +53,7 @@ namespace UWP_Project.ViewModel
 
         private GpioController GPIO;
 
-        private const int LED_PIN = 27;
+        private const int LED_PIN = 5;
 
         private string _str;
         public string Str
@@ -105,11 +107,11 @@ namespace UWP_Project.ViewModel
             LED = !LED;
             if (LED)
             {
-                LEDPin.Write(GpioPinValue.High);
+                LEDPin.Write(GpioPinValue.Low);
             }
             else
             {
-                LEDPin.Write(GpioPinValue.Low);
+                LEDPin.Write(GpioPinValue.High);
             }
         }
 
